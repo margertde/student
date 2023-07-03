@@ -1,0 +1,60 @@
+class Student:
+    def __init__(self, name, roll_number):
+        self.name = name
+        self.roll_number = roll_number
+    
+    def display_info(self):
+        print(f'Name: {self.name}')
+        print(f'Roll Number: {self.roll_number}')
+
+class StudentManager:
+    def __init__(self):
+        self.students = []
+    
+    def add_student(self, name, roll_number):
+        student = Student(name, roll_number)
+        self.students.append(student)
+        print(f'Student "{name}" added.')
+    
+    def remove_student(self, roll_number):
+        for student in self.students:
+            if student.roll_number == roll_number:
+                self.students.remove(student)
+                print(f'Student with roll number "{roll_number}" removed.')
+                return
+        
+        print(f'Student with roll number "{roll_number}" not found.')
+    
+    def display_students(self):
+        if self.students:
+            print('Student List:')
+            for student in self.students:
+                student.display_info()
+                print('---')
+        else:
+            print('No students found in the list.')
+    
+student_manager = StudentManager()
+
+while True:
+    print('\nStudent Management System')
+    print('1. Add student')
+    print('2. Remove student')
+    print('3. Display students')
+    print('4. Exit')
+
+    choice = input('Select an option: ')
+
+    if choice == '1':
+        name = input('Enter the student name: ')
+        roll_number = input('Enter the student roll number: ')
+        student_manager.add_student(name, roll_number)
+    elif choice == '2':
+        roll_number = input('Enter the student roll number to remove: ')
+        student_manager.remove_student(roll_number)
+    elif choice == '3':
+        student_manager.display_students()
+    elif choice == '4':
+        break
+    else:
+        print('Invalid choice. Please try again.')
